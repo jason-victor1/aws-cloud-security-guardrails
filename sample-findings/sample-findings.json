@@ -1,0 +1,22 @@
+[
+  {
+    "id": "FINDING-001",
+    "title": "Public S3 exposure risk",
+    "severity": "High",
+    "domain": "Public Exposure",
+    "resource": "aws_s3_bucket.example",
+    "risk": "Bucket may expose sensitive data if public access is allowed.",
+    "recommended_fix": "Enable S3 Block Public Access and validate bucket policy.",
+    "status": "open"
+  },
+  {
+    "id": "FINDING-002",
+    "title": "Long-lived IAM access key",
+    "severity": "Medium",
+    "domain": "IAM",
+    "resource": "iam_user.demo",
+    "risk": "Long-lived access keys increase credential exposure risk.",
+    "recommended_fix": "Rotate key and migrate workload to role-based access where possible.",
+    "status": "open"
+  }
+]

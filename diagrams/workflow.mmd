@@ -1,0 +1,11 @@
+flowchart TD
+    A[Start: AWS Security Review] --> B[Inventory AWS Account]
+    B --> C[Review IAM and Credential Risks]
+    C --> D[Review Public Exposure]
+    D --> E[Review Logging and Detection Coverage]
+    E --> F[Review CI/CD and IaC Guardrails]
+    F --> G[Normalize Findings]
+    G --> H[Prioritize by Blast Radius]
+    H --> I[Generate Remediation Backlog]
+    I --> J[Map Findings to Controls]
+    J --> K[Produce Executive Summary and Evidence Pack]

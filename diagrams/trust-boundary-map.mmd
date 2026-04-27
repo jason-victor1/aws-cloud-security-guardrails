@@ -1,0 +1,8 @@
+flowchart LR
+    Dev[Developer Workstation] --> GitHub[GitHub Repository]
+    GitHub --> Actions[GitHub Actions]
+    Actions --> AWS[AWS Account]
+    AWS --> Logs[CloudTrail / GuardDuty / Security Hub]
+    Logs --> Findings[Findings Normalizer]
+    Findings --> Backlog[Remediation Backlog]
+    Backlog --> Evidence[Evidence Pack]

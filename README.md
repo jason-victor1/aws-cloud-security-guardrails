@@ -1,0 +1,89 @@
+# AWS Cloud Security Guardrails
+
+## Purpose
+
+This project demonstrates a practical AWS cloud security guardrails workflow for identifying and reducing common cloud security risks:
+
+- leaked credentials
+- over-permissive IAM
+- public exposure
+- missing logging and detection coverage
+- weak CI/CD controls
+- cloud cost-abuse risk
+- weak compliance evidence
+
+The project is designed as a portfolio-grade lab for cloud security, DevSecOps, and security automation contract work.
+
+## Problem
+
+Many AWS security failures come from preventable control gaps:
+
+- long-lived or leaked AWS access keys
+- overly permissive IAM policies
+- public S3 buckets or exposed network paths
+- missing CloudTrail, GuardDuty, Security Hub, or AWS Config coverage
+- weak GitHub Actions and CI/CD token hygiene
+- no repeatable evidence trail for remediation or audit readiness
+
+## What This Lab Builds
+
+This lab includes:
+
+- Terraform security baselines
+- CI/CD security checks
+- AWS identity and exposure review scripts
+- sample findings
+- remediation backlog templates
+- executive summary template
+- control matrix
+- incident response runbook
+- audit evidence checklist
+
+## Target Buyer Problems
+
+This project maps to contractor needs in:
+
+- AWS cloud security hardening
+- DevSecOps / CI/CD security
+- security automation
+- IAM and credential risk reduction
+- compliance evidence readiness
+
+## Repo Structure
+
+```text
+aws-cloud-security-guardrails/
+  README.md
+  docs/
+  terraform/
+  github-actions/
+  automation/
+  sample-findings/
+  diagrams/
+```
+
+## Project Phases
+
+### Phase 0: Documentation Skeleton
+
+Create the project charter, architecture, threat model, control matrix, assessment methodology, and remediation templates.
+
+### Phase 1: Terraform Security Baselines
+
+Build reusable AWS guardrail modules for CloudTrail, GuardDuty, Security Hub, AWS Config, S3 public access blocking, IAM least privilege examples, and budget/anomaly alerts.
+
+### Phase 2: CI/CD Security Checks
+
+Add GitHub Actions workflows for Terraform validation, IaC scanning, and secrets scanning.
+
+### Phase 3: Python Assessment Scripts
+
+Create small review scripts for IAM key age, public S3 exposure, risky security groups, and normalized findings.
+
+### Phase 4: Evidence and Reporting
+
+Produce sample findings, remediation backlog, executive summary, and evidence checklist.
+
+## Portfolio Value
+
+This project demonstrates the ability to move from cloud security findings to automated guardrails, remediation evidence, and business-readable reporting.

@@ -1,0 +1,3 @@
+ID,Finding,Severity,Owner,Affected Resource,Recommended Fix,Evidence,Status,Due Date
+FINDING-001,Public S3 exposure risk,High,Platform,aws_s3_bucket.example,Enable S3 Block Public Access,sample-findings.json,Open,TBD
+FINDING-002,Long-lived IAM access key,Medium,Security,iam_user.demo,Rotate key and migrate to role-based access,iam-key-age-report.json,Open,TBD
