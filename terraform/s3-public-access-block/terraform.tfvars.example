@@ -1,0 +1,7 @@
+aws_region = "us-east-1"
+
+enable_account_public_access_block = true
+create_example_bucket              = true
+
+# Must be globally unique if create_example_bucket = true.
+example_bucket_name = "replace-with-unique-lab-bucket-name"
