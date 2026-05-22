@@ -18,6 +18,7 @@ This module enables:
 - `ignore_public_acls`
 - `block_public_policy`
 - `restrict_public_buckets`
+- example bucket versioning
 
 ## Files
 
