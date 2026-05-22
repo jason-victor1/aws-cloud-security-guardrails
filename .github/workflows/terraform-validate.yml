@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   terraform-validate:
-    name: Terraform fmt and validate
+    name: Terraform fmt, validate, and IaC scan
     runs-on: ubuntu-latest
 
     defaults:
@@ -36,3 +36,10 @@ jobs:
 
       - name: Terraform validate
         run: terraform validate
+
+      - name: Checkov IaC scan
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: terraform
+          framework: terraform
+          quiet: true
