@@ -18,6 +18,7 @@ This module enables:
 - `ignore_public_acls`
 - `block_public_policy`
 - `restrict_public_buckets`
+- example bucket versioning
 
 ## Files
 
@@ -102,3 +103,11 @@ This guardrail can produce the following evidence:
 
 - [`../../docs/03-control-matrix.md`](../../docs/03-control-matrix.md)
 - [`../../docs/08-evidence-checklist.md`](../../docs/08-evidence-checklist.md)
+
+## Static Analysis Scope
+
+This module is scoped to the S3 Public Access Block guardrail.
+
+The example bucket also includes versioning to demonstrate a stronger baseline. Broader production controls such as KMS encryption, access logging, lifecycle rules, cross-region replication, and event notifications are intentionally deferred to future guardrail modules.
+
+Checkov skips for these deferred controls are documented in the root `.checkov.yml`.

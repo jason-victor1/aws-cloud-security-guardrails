@@ -1,0 +1,17 @@
+framework:
+  - terraform
+
+skip-check:
+  # Implemented in this module, but Checkov is still flagging the counted example
+  # bucket resource rather than correlating the separate Terraform guardrail resources.
+  - CKV_AWS_21 # S3 bucket versioning is implemented via aws_s3_bucket_versioning.example.
+  - CKV2_AWS_6 # Public Access Block is implemented via aws_s3_bucket_public_access_block.example.
+
+  # Out of scope for the V1 S3 Public Access Block guardrail.
+  # These are valid production hardening controls, but they belong in future
+  # dedicated guardrail modules or issues rather than this first public exposure control.
+  - CKV_AWS_145 # Ensure that S3 buckets are encrypted with KMS by default.
+  - CKV_AWS_144 # Ensure that S3 bucket has cross-region replication enabled.
+  - CKV_AWS_18 # Ensure the S3 bucket has access logging enabled.
+  - CKV2_AWS_61 # Ensure that an S3 bucket has a lifecycle configuration.
+  - CKV2_AWS_62 # Ensure S3 buckets should have event notifications enabled.

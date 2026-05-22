@@ -15,6 +15,16 @@ resource "aws_s3_bucket" "example" {
   tags = var.tags
 }
 
+resource "aws_s3_bucket_versioning" "example" {
+  count = var.create_example_bucket ? 1 : 0
+
+  bucket = aws_s3_bucket.example[0].id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "example" {
   count = var.create_example_bucket ? 1 : 0
 
