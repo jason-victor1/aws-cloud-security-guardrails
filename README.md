@@ -62,6 +62,14 @@ aws-cloud-security-guardrails/
   diagrams/
 ```
 
+## Runbooks
+
+This project includes operational runbooks that connect guardrail detections to response workflows.
+
+| Runbook                                                                                          | Purpose                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`docs/runbooks/credential-exposure-response.md`](docs/runbooks/credential-exposure-response.md) | Defines the response workflow for suspected hardcoded secrets, API keys, AWS credentials, GitHub tokens, and related credential exposure events. |
+
 ## Project Phases
 
 ### Phase 0: Documentation Skeleton
