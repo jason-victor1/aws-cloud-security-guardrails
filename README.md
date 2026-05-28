@@ -62,6 +62,14 @@ aws-cloud-security-guardrails/
   diagrams/
 ```
 
+## Automation
+
+This project includes detection-only automation scripts.
+
+| Script                                                               | Purpose                                                                                              |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [`automation/iam-key-age-check.py`](automation/iam-key-age-check.py) | Reviews IAM user access key age and flags long-lived keys without printing secret access key values. |
+
 ## Runbooks
 
 This project includes operational runbooks that connect guardrail detections to response workflows.
