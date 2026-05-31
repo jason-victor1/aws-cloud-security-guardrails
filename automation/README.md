@@ -169,3 +169,100 @@ Required IAM permissions:
 ```
 
 Do not commit AWS credentials, profile files, access keys, secret keys, account IDs, or output containing sensitive environment details.
+
+## Public S3 Exposure Review
+
+Script:
+
+```text
+automation/public-s3-check.py
+```
+
+Purpose:
+
+Review S3 bucket public exposure posture and report risky bucket-level configurations.
+
+Security model:
+
+- read-only S3 API calls
+- read-only S3 Control API calls
+- read-only STS identity lookup if `--account-id` is not supplied
+- no object reads
+- no object downloads
+- no bucket creation
+- no bucket modification
+- no bucket policy changes
+- no infrastructure deployment
+
+Usage:
+
+```bash
+python automation/public-s3-check.py --format table
+```
+
+With an AWS profile:
+
+```bash
+python automation/public-s3-check.py --profile lab-profile --format table
+```
+
+With an explicit account ID:
+
+```bash
+python automation/public-s3-check.py --account-id 123456789012 --format table
+```
+
+JSON output:
+
+```bash
+python automation/public-s3-check.py --format json
+```
+
+Fail with exit code `1` when high or critical findings are detected:
+
+```bash
+python automation/public-s3-check.py --fail-on-findings
+```
+
+Risk categories include:
+
+- missing account-level S3 Public Access Block
+- incomplete account-level S3 Public Access Block
+- missing bucket-level S3 Public Access Block
+- incomplete bucket-level S3 Public Access Block
+- public bucket policy
+- public ACL grant
+- unable to evaluate account or bucket configuration
+
+Exit codes:
+
+| Code | Meaning                                                              |
+| ---: | -------------------------------------------------------------------- |
+|    0 | Script completed successfully                                        |
+|    1 | High or critical findings detected and `--fail-on-findings` was used |
+|    2 | Runtime or AWS configuration error                                   |
+
+Required IAM permissions:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:GetBucketPolicyStatus",
+        "s3:GetBucketAcl",
+        "s3:HeadBucket",
+        "s3control:GetPublicAccessBlock",
+        "sts:GetCallerIdentity"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+Do not commit AWS credentials, profile files, access keys, secret keys, account IDs, bucket contents, or output containing sensitive environment details.

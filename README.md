@@ -70,6 +70,7 @@ This project includes detection-only automation scripts.
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`automation/iam-key-age-check.py`](automation/iam-key-age-check.py)                 | Reviews IAM user access key age and flags long-lived keys without printing secret access key values.                                                               |
 | [`automation/security-group-risk-check.py`](automation/security-group-risk-check.py) | Reviews AWS security group ingress rules and flags risky public exposure patterns such as public SSH, RDP, database, Kubernetes API, Redis, and broad port ranges. |
+| [`automation/public-s3-check.py`](automation/public-s3-check.py)                     | Reviews S3 bucket public exposure posture, including account-level and bucket-level Public Access Block, public bucket policy status, and public ACL grants.       |
 
 ## Runbooks
 
