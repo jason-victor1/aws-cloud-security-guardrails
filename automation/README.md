@@ -534,3 +534,75 @@ Generated ticket fields include:
 - closure checklist
 
 Do not commit AWS credentials, account IDs, access keys, secret keys, profiles, Terraform state, raw scan outputs, normalized findings, or generated remediation tickets that contain sensitive environment details.
+
+## Executive Summary Report Generator
+
+Script:
+
+```text
+automation/executive-summary-generator.py
+```
+
+Purpose:
+
+Generate a client-style Markdown executive summary from normalized security findings.
+
+Security model:
+
+- no AWS API calls
+- no AWS credentials required
+- no cloud resource modification
+- no infrastructure deployment
+- reads local normalized JSON input only
+- writes Markdown to stdout or an optional output file
+
+Expected input:
+
+```text
+Normalized JSON output from automation/finding-normalizer.py
+```
+
+Usage:
+
+```bash
+python automation/executive-summary-generator.py \
+  --input normalized-findings.json
+```
+
+Write the report to a file:
+
+```bash
+python automation/executive-summary-generator.py \
+  --input normalized-findings.json \
+  --output executive-summary.md
+```
+
+Set a custom report title:
+
+```bash
+python automation/executive-summary-generator.py \
+  --input normalized-findings.json \
+  --title "AWS Security Assessment Executive Summary"
+```
+
+Include informational findings:
+
+```bash
+python automation/executive-summary-generator.py \
+  --input normalized-findings.json \
+  --include-info
+```
+
+Report sections include:
+
+- executive overview
+- overall posture label
+- findings by severity
+- findings by source
+- affected resource types
+- top high/critical findings
+- remediation themes
+- recommended next actions
+- notes and limitations
+
+Do not commit AWS credentials, account IDs, access keys, secret keys, profiles, Terraform state, raw scan outputs, normalized findings, remediation tickets, or generated reports that contain sensitive environment details.
