@@ -72,6 +72,7 @@ This project includes detection-only automation scripts.
 | [`automation/security-group-risk-check.py`](automation/security-group-risk-check.py) | Reviews AWS security group ingress rules and flags risky public exposure patterns such as public SSH, RDP, database, Kubernetes API, Redis, and broad port ranges.                                   |
 | [`automation/public-s3-check.py`](automation/public-s3-check.py)                     | Reviews S3 bucket public exposure posture, including account-level and bucket-level Public Access Block, public bucket policy status, and public ACL grants.                                         |
 | [`automation/cloudtrail-coverage-check.py`](automation/cloudtrail-coverage-check.py) | Reviews AWS CloudTrail logging coverage, including multi-region status, logging status, log file validation, KMS metadata, management event selectors, and recent event-history lookup availability. |
+| [`automation/finding-normalizer.py`](automation/finding-normalizer.py)               | Normalizes JSON output from automation scripts into a consistent finding schema for evidence collection, reporting, remediation backlog creation, and future ticket generation.                      |
 
 ## Runbooks
 
