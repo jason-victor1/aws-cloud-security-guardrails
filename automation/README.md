@@ -453,3 +453,84 @@ Normalized finding schema:
 ```
 
 Do not commit AWS credentials, account IDs, access keys, secret keys, profiles, Terraform state, scan outputs, or normalized findings that contain sensitive environment details.
+
+## Remediation Ticket Generator
+
+Script:
+
+```text
+automation/remediation-ticket-generator.py
+```
+
+Purpose:
+
+Convert normalized security findings into structured remediation backlog tickets.
+
+Security model:
+
+- no AWS API calls
+- no AWS credentials required
+- no cloud resource modification
+- no automatic GitHub Issue creation in V1
+- reads local normalized JSON input only
+- writes Markdown or JSON output to stdout or an optional output file
+
+Expected input:
+
+```text
+Normalized JSON output from automation/finding-normalizer.py
+```
+
+Usage:
+
+```bash
+python automation/remediation-ticket-generator.py \
+  --input normalized-findings.json \
+  --format markdown
+```
+
+Write Markdown tickets to a file:
+
+```bash
+python automation/remediation-ticket-generator.py \
+  --input normalized-findings.json \
+  --format markdown \
+  --output remediation-backlog.md
+```
+
+Write JSON tickets to a file:
+
+```bash
+python automation/remediation-ticket-generator.py \
+  --input normalized-findings.json \
+  --format json \
+  --output remediation-tickets.json
+```
+
+Include informational findings:
+
+```bash
+python automation/remediation-ticket-generator.py \
+  --input normalized-findings.json \
+  --format markdown \
+  --include-info
+```
+
+Generated ticket fields include:
+
+- ticket ID
+- title
+- severity
+- status
+- source
+- resource type
+- resource ID
+- resource name
+- region
+- finding type
+- reason
+- recommendation
+- evidence summary
+- closure checklist
+
+Do not commit AWS credentials, account IDs, access keys, secret keys, profiles, Terraform state, raw scan outputs, normalized findings, or generated remediation tickets that contain sensitive environment details.
