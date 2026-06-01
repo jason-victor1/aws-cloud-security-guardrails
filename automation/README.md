@@ -368,3 +368,88 @@ Required IAM permissions:
 ```
 
 Do not commit AWS credentials, profile files, access keys, secret keys, account IDs, CloudTrail log contents, or output containing sensitive environment details.
+
+## Finding Normalizer
+
+Script:
+
+```text
+automation/finding-normalizer.py
+```
+
+Purpose:
+
+Normalize JSON output from AWS Cloud Security Guardrails automation scripts into a consistent finding schema for evidence collection, reporting, remediation backlog creation, and future ticket generation.
+
+Security model:
+
+- no AWS API calls
+- no AWS credentials required
+- no cloud resource modification
+- reads local JSON input only
+- writes normalized JSON to stdout or an optional output file
+
+Supported sources:
+
+- `iam-key-age-check`
+- `security-group-risk-check`
+- `public-s3-check`
+- `cloudtrail-coverage-check`
+
+Usage:
+
+```bash
+python automation/finding-normalizer.py \
+  --source security-group-risk-check \
+  --input sg-findings.json
+```
+
+Auto-detect source from input shape:
+
+```bash
+python automation/finding-normalizer.py \
+  --source auto \
+  --input cloudtrail-findings.json
+```
+
+Write normalized output to a file:
+
+```bash
+python automation/finding-normalizer.py \
+  --source public-s3-check \
+  --input s3-findings.json \
+  --output normalized-s3-findings.json
+```
+
+Normalized finding schema:
+
+```json
+{
+  "schema_version": "1.0",
+  "finding_count": 1,
+  "findings": [
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
+      "source": "security-group-risk-check",
+      "resource_type": "security_group",
+      "resource_id": "sg-xxxxxxxx",
+      "resource_name": "example-security-group",
+      "region": null,
+      "severity": "HIGH",
+      "finding_type": "public_ssh_exposure",
+      "reason": "Security group exposes SSH on port 22 to 0.0.0.0/0.",
+      "recommendation": "Restrict SSH exposure to approved administrative CIDRs, use a VPN or bastion pattern if required, or prefer AWS Systems Manager Session Manager.",
+      "evidence": {
+        "protocol": "tcp",
+        "from_port": 22,
+        "to_port": 22,
+        "source": "0.0.0.0/0"
+      },
+      "original_finding": {}
+    }
+  ]
+}
+```
+
+Do not commit AWS credentials, account IDs, access keys, secret keys, profiles, Terraform state, scan outputs, or normalized findings that contain sensitive environment details.
