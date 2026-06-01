@@ -266,3 +266,105 @@ Required IAM permissions:
 ```
 
 Do not commit AWS credentials, profile files, access keys, secret keys, account IDs, bucket contents, or output containing sensitive environment details.
+
+## CloudTrail Logging Coverage Review
+
+Script:
+
+```text
+automation/cloudtrail-coverage-check.py
+```
+
+Purpose:
+
+Review AWS CloudTrail logging coverage and report gaps that could weaken incident investigation and audit evidence.
+
+Security model:
+
+- read-only CloudTrail API calls
+- no trail creation
+- no trail modification
+- no logging start/stop actions
+- no trail deletion
+- no CloudTrail log object reads
+- no infrastructure deployment
+
+Usage:
+
+```bash
+python automation/cloudtrail-coverage-check.py --region us-east-1 --format table
+```
+
+With an AWS profile:
+
+```bash
+python automation/cloudtrail-coverage-check.py --profile lab-profile --region us-east-1 --format table
+```
+
+JSON output:
+
+```bash
+python automation/cloudtrail-coverage-check.py --region us-east-1 --format json
+```
+
+Include informational event-history lookup result:
+
+```bash
+python automation/cloudtrail-coverage-check.py --region us-east-1 --include-info
+```
+
+Skip the event-history lookup check:
+
+```bash
+python automation/cloudtrail-coverage-check.py --region us-east-1 --skip-event-history-check
+```
+
+Fail with exit code `1` when high or critical findings are detected:
+
+```bash
+python automation/cloudtrail-coverage-check.py --region us-east-1 --fail-on-findings
+```
+
+Risk categories include:
+
+- no trails found
+- trail is not logging
+- no multi-region trail found
+- log file validation disabled
+- KMS encryption key not configured
+- CloudWatch Logs delivery not configured
+- unable to retrieve trail status
+- unable to retrieve event selectors
+- management events not enabled
+- management event coverage may be incomplete
+- CloudTrail LookupEvents unavailable
+
+Exit codes:
+
+| Code | Meaning                                                              |
+| ---: | -------------------------------------------------------------------- |
+|    0 | Script completed successfully                                        |
+|    1 | High or critical findings detected and `--fail-on-findings` was used |
+|    2 | Runtime or AWS configuration error                                   |
+
+Required IAM permissions:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudtrail:DescribeTrails",
+        "cloudtrail:GetTrailStatus",
+        "cloudtrail:GetEventSelectors",
+        "cloudtrail:LookupEvents"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+Do not commit AWS credentials, profile files, access keys, secret keys, account IDs, CloudTrail log contents, or output containing sensitive environment details.
