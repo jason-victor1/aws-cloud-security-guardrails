@@ -1,0 +1,362 @@
+{
+  "schema_version": "1.0",
+  "finding_count": 11,
+  "findings": [
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:14:55.901761+00:00",
+      "source": "iam-key-age-check",
+      "resource_type": "iam_access_key",
+      "resource_id": "****DEMO",
+      "resource_name": "demo-ci-user",
+      "region": null,
+      "severity": "HIGH",
+      "finding_type": "long_lived_iam_access_key",
+      "reason": "IAM access key for user demo-ci-user is 140 days old. Threshold is 90 days.",
+      "recommendation": "Review whether this IAM access key is still required. Rotate or retire long-lived keys, prefer role-based access where possible, and confirm recent usage before removal.",
+      "evidence": {
+        "user_name": "demo-ci-user",
+        "access_key_id_suffix": "****DEMO",
+        "status": "Active",
+        "create_date": "2025-01-15T12:00:00+00:00",
+        "age_days": 140,
+        "threshold_days": 90,
+        "exceeds_threshold": true,
+        "last_used_date": "2026-05-01T10:30:00+00:00",
+        "last_used_service": "s3",
+        "last_used_region": "us-east-1"
+      },
+      "original_finding": {
+        "user_name": "demo-ci-user",
+        "access_key_id_suffix": "****DEMO",
+        "status": "Active",
+        "create_date": "2025-01-15T12:00:00+00:00",
+        "age_days": 140,
+        "threshold_days": 90,
+        "exceeds_threshold": true,
+        "last_used_date": "2026-05-01T10:30:00+00:00",
+        "last_used_service": "s3",
+        "last_used_region": "us-east-1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:14:55.901761+00:00",
+      "source": "iam-key-age-check",
+      "resource_type": "iam_access_key",
+      "resource_id": "****SAFE",
+      "resource_name": "demo-readonly-user",
+      "region": null,
+      "severity": "INFO",
+      "finding_type": "iam_access_key_age_observed",
+      "reason": "IAM access key for user demo-readonly-user is 30 days old. Threshold is 90 days.",
+      "recommendation": "No threshold breach was reported for this key. Continue monitoring key age and prefer role-based access over long-lived static credentials.",
+      "evidence": {
+        "user_name": "demo-readonly-user",
+        "access_key_id_suffix": "****SAFE",
+        "status": "Active",
+        "create_date": "2026-05-01T12:00:00+00:00",
+        "age_days": 30,
+        "threshold_days": 90,
+        "exceeds_threshold": false,
+        "last_used_date": null,
+        "last_used_service": null,
+        "last_used_region": null
+      },
+      "original_finding": {
+        "user_name": "demo-readonly-user",
+        "access_key_id_suffix": "****SAFE",
+        "status": "Active",
+        "create_date": "2026-05-01T12:00:00+00:00",
+        "age_days": 30,
+        "threshold_days": 90,
+        "exceeds_threshold": false,
+        "last_used_date": null,
+        "last_used_service": null,
+        "last_used_region": null
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:15:12.673942+00:00",
+      "source": "security-group-risk-check",
+      "resource_type": "security_group",
+      "resource_id": "sg-demo0001",
+      "resource_name": "demo-public-admin-sg",
+      "region": null,
+      "severity": "CRITICAL",
+      "finding_type": "public_ssh_exposure",
+      "reason": "Security group exposes SSH on port 22 to 0.0.0.0/0.",
+      "recommendation": "Restrict SSH exposure to approved administrative CIDRs, use a VPN or bastion pattern if required, or prefer AWS Systems Manager Session Manager.",
+      "evidence": {
+        "group_id": "sg-demo0001",
+        "group_name": "demo-public-admin-sg",
+        "vpc_id": "vpc-demo0001",
+        "protocol": "tcp",
+        "from_port": 22,
+        "to_port": 22,
+        "source_type": "ipv4",
+        "source": "0.0.0.0/0",
+        "rule_description": "synthetic demo rule"
+      },
+      "original_finding": {
+        "group_id": "sg-demo0001",
+        "group_name": "demo-public-admin-sg",
+        "vpc_id": "vpc-demo0001",
+        "protocol": "tcp",
+        "from_port": 22,
+        "to_port": 22,
+        "source_type": "ipv4",
+        "source": "0.0.0.0/0",
+        "severity": "CRITICAL",
+        "category": "public ssh exposure",
+        "reason": "Security group exposes SSH on port 22 to 0.0.0.0/0.",
+        "rule_description": "synthetic demo rule"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:15:12.673942+00:00",
+      "source": "security-group-risk-check",
+      "resource_type": "security_group",
+      "resource_id": "sg-demo0002",
+      "resource_name": "demo-db-sg",
+      "region": null,
+      "severity": "HIGH",
+      "finding_type": "public_mysql/mariadb_exposure",
+      "reason": "Security group exposes MySQL/MariaDB on port 3306 to 0.0.0.0/0.",
+      "recommendation": "Remove public database exposure. Restrict access to application security groups, private subnets, or approved administrative CIDRs.",
+      "evidence": {
+        "group_id": "sg-demo0002",
+        "group_name": "demo-db-sg",
+        "vpc_id": "vpc-demo0001",
+        "protocol": "tcp",
+        "from_port": 3306,
+        "to_port": 3306,
+        "source_type": "ipv4",
+        "source": "0.0.0.0/0",
+        "rule_description": "synthetic demo rule"
+      },
+      "original_finding": {
+        "group_id": "sg-demo0002",
+        "group_name": "demo-db-sg",
+        "vpc_id": "vpc-demo0001",
+        "protocol": "tcp",
+        "from_port": 3306,
+        "to_port": 3306,
+        "source_type": "ipv4",
+        "source": "0.0.0.0/0",
+        "severity": "HIGH",
+        "category": "public mysql/mariadb exposure",
+        "reason": "Security group exposes MySQL/MariaDB on port 3306 to 0.0.0.0/0.",
+        "rule_description": "synthetic demo rule"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:15:12.673942+00:00",
+      "source": "security-group-risk-check",
+      "resource_type": "security_group",
+      "resource_id": "sg-demo0003",
+      "resource_name": "demo-web-sg",
+      "region": null,
+      "severity": "INFO",
+      "finding_type": "public_web_exposure",
+      "reason": "Security group exposes HTTP/HTTPS to 0.0.0.0/0. Review whether this is intentional.",
+      "recommendation": "Confirm public HTTP/HTTPS exposure is intentional. If public access is not required, restrict the source or place the workload behind approved edge controls.",
+      "evidence": {
+        "group_id": "sg-demo0003",
+        "group_name": "demo-web-sg",
+        "vpc_id": "vpc-demo0002",
+        "protocol": "tcp",
+        "from_port": 80,
+        "to_port": 443,
+        "source_type": "ipv4",
+        "source": "0.0.0.0/0",
+        "rule_description": "synthetic demo web rule"
+      },
+      "original_finding": {
+        "group_id": "sg-demo0003",
+        "group_name": "demo-web-sg",
+        "vpc_id": "vpc-demo0002",
+        "protocol": "tcp",
+        "from_port": 80,
+        "to_port": 443,
+        "source_type": "ipv4",
+        "source": "0.0.0.0/0",
+        "severity": "INFO",
+        "category": "public web exposure",
+        "reason": "Security group exposes HTTP/HTTPS to 0.0.0.0/0. Review whether this is intentional.",
+        "rule_description": "synthetic demo web rule"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:16:22.500707+00:00",
+      "source": "public-s3-check",
+      "resource_type": "s3_bucket",
+      "resource_id": "demo-public-assets-bucket",
+      "resource_name": "demo-public-assets-bucket",
+      "region": "us-east-1",
+      "severity": "CRITICAL",
+      "finding_type": "public_bucket_policy",
+      "reason": "S3 reports that the bucket policy is public.",
+      "recommendation": "Review the bucket policy, remove unintended public principals, and confirm that account-level and bucket-level Public Access Block controls are enabled.",
+      "evidence": {
+        "bucket_name": "demo-public-assets-bucket",
+        "region": "us-east-1",
+        "finding_type": "public bucket policy",
+        "evidence": "PolicyStatus.IsPublic=true"
+      },
+      "original_finding": {
+        "bucket_name": "demo-public-assets-bucket",
+        "region": "us-east-1",
+        "severity": "CRITICAL",
+        "finding_type": "public bucket policy",
+        "reason": "S3 reports that the bucket policy is public.",
+        "evidence": "PolicyStatus.IsPublic=true"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:16:22.500707+00:00",
+      "source": "public-s3-check",
+      "resource_type": "aws_account",
+      "resource_id": "ACCOUNT_LEVEL",
+      "resource_name": "ACCOUNT_LEVEL",
+      "region": null,
+      "severity": "HIGH",
+      "finding_type": "incomplete_account-level_S3_Public_Access_Block",
+      "reason": "Account-level S3 Public Access Block exists but not all four settings are enabled.",
+      "recommendation": "Enable all four account-level S3 Public Access Block settings unless a documented exception exists.",
+      "evidence": {
+        "bucket_name": "ACCOUNT_LEVEL",
+        "region": null,
+        "finding_type": "incomplete account-level S3 Public Access Block",
+        "evidence": "RestrictPublicBuckets"
+      },
+      "original_finding": {
+        "bucket_name": "ACCOUNT_LEVEL",
+        "region": null,
+        "severity": "HIGH",
+        "finding_type": "incomplete account-level S3 Public Access Block",
+        "reason": "Account-level S3 Public Access Block exists but not all four settings are enabled.",
+        "evidence": "RestrictPublicBuckets"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:16:22.500707+00:00",
+      "source": "public-s3-check",
+      "resource_type": "s3_bucket",
+      "resource_id": "demo-legacy-acl-bucket",
+      "resource_name": "demo-legacy-acl-bucket",
+      "region": "us-west-2",
+      "severity": "HIGH",
+      "finding_type": "public_ACL_grant",
+      "reason": "Bucket ACL includes a public group grant.",
+      "recommendation": "Review the S3 exposure finding, confirm whether public access is intentional, and apply Public Access Block or least-privilege policy controls.",
+      "evidence": {
+        "bucket_name": "demo-legacy-acl-bucket",
+        "region": "us-west-2",
+        "finding_type": "public ACL grant",
+        "evidence": "AllUsers:READ"
+      },
+      "original_finding": {
+        "bucket_name": "demo-legacy-acl-bucket",
+        "region": "us-west-2",
+        "severity": "HIGH",
+        "finding_type": "public ACL grant",
+        "reason": "Bucket ACL includes a public group grant.",
+        "evidence": "AllUsers:READ"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:16:31.081932+00:00",
+      "source": "cloudtrail-coverage-check",
+      "resource_type": "cloudtrail_trail",
+      "resource_id": "ACCOUNT_REGION",
+      "resource_name": "ACCOUNT_REGION",
+      "region": null,
+      "severity": "HIGH",
+      "finding_type": "no_multi-region_trail_found",
+      "reason": "No CloudTrail trail returned by this region is configured as multi-region.",
+      "recommendation": "Configure at least one multi-region trail so activity across enabled AWS Regions is captured.",
+      "evidence": {
+        "trail_name": "ACCOUNT_REGION",
+        "trail_arn": null,
+        "home_region": null,
+        "finding_type": "no multi-region trail found",
+        "evidence": "trails_checked=1"
+      },
+      "original_finding": {
+        "trail_name": "ACCOUNT_REGION",
+        "trail_arn": null,
+        "home_region": null,
+        "severity": "HIGH",
+        "finding_type": "no multi-region trail found",
+        "reason": "No CloudTrail trail returned by this region is configured as multi-region.",
+        "evidence": "trails_checked=1"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:16:31.081932+00:00",
+      "source": "cloudtrail-coverage-check",
+      "resource_type": "cloudtrail_trail",
+      "resource_id": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+      "resource_name": "demo-audit-trail",
+      "region": "us-east-1",
+      "severity": "MEDIUM",
+      "finding_type": "log_file_validation_disabled",
+      "reason": "CloudTrail log file validation is not enabled for this trail.",
+      "recommendation": "Enable CloudTrail log file validation to support integrity verification of delivered CloudTrail logs.",
+      "evidence": {
+        "trail_name": "demo-audit-trail",
+        "trail_arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+        "home_region": "us-east-1",
+        "finding_type": "log file validation disabled",
+        "evidence": "LogFileValidationEnabled=False"
+      },
+      "original_finding": {
+        "trail_name": "demo-audit-trail",
+        "trail_arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+        "home_region": "us-east-1",
+        "severity": "MEDIUM",
+        "finding_type": "log file validation disabled",
+        "reason": "CloudTrail log file validation is not enabled for this trail.",
+        "evidence": "LogFileValidationEnabled=False"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "normalized_at": "2026-06-04T04:16:31.081932+00:00",
+      "source": "cloudtrail-coverage-check",
+      "resource_type": "cloudtrail_trail",
+      "resource_id": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+      "resource_name": "demo-audit-trail",
+      "region": "us-east-1",
+      "severity": "LOW",
+      "finding_type": "CloudWatch_Logs_delivery_not_configured",
+      "reason": "Trail does not show CloudWatch Logs delivery metadata.",
+      "recommendation": "Review the CloudTrail coverage finding and update trail configuration to improve investigation and audit evidence readiness.",
+      "evidence": {
+        "trail_name": "demo-audit-trail",
+        "trail_arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+        "home_region": "us-east-1",
+        "finding_type": "CloudWatch Logs delivery not configured",
+        "evidence": "CloudWatchLogsLogGroupArn not present"
+      },
+      "original_finding": {
+        "trail_name": "demo-audit-trail",
+        "trail_arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+        "home_region": "us-east-1",
+        "severity": "LOW",
+        "finding_type": "CloudWatch Logs delivery not configured",
+        "reason": "Trail does not show CloudWatch Logs delivery metadata.",
+        "evidence": "CloudWatchLogsLogGroupArn not present"
+      }
+    }
+  ]
+}

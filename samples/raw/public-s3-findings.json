@@ -1,0 +1,26 @@
+[
+  {
+    "bucket_name": "ACCOUNT_LEVEL",
+    "region": null,
+    "severity": "HIGH",
+    "finding_type": "incomplete account-level S3 Public Access Block",
+    "reason": "Account-level S3 Public Access Block exists but not all four settings are enabled.",
+    "evidence": "RestrictPublicBuckets"
+  },
+  {
+    "bucket_name": "demo-public-assets-bucket",
+    "region": "us-east-1",
+    "severity": "CRITICAL",
+    "finding_type": "public bucket policy",
+    "reason": "S3 reports that the bucket policy is public.",
+    "evidence": "PolicyStatus.IsPublic=true"
+  },
+  {
+    "bucket_name": "demo-legacy-acl-bucket",
+    "region": "us-west-2",
+    "severity": "HIGH",
+    "finding_type": "public ACL grant",
+    "reason": "Bucket ACL includes a public group grant.",
+    "evidence": "AllUsers:READ"
+  }
+]

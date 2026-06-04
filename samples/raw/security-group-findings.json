@@ -1,0 +1,44 @@
+[
+  {
+    "group_id": "sg-demo0001",
+    "group_name": "demo-public-admin-sg",
+    "vpc_id": "vpc-demo0001",
+    "protocol": "tcp",
+    "from_port": 22,
+    "to_port": 22,
+    "source_type": "ipv4",
+    "source": "0.0.0.0/0",
+    "severity": "CRITICAL",
+    "category": "public ssh exposure",
+    "reason": "Security group exposes SSH on port 22 to 0.0.0.0/0.",
+    "rule_description": "synthetic demo rule"
+  },
+  {
+    "group_id": "sg-demo0002",
+    "group_name": "demo-db-sg",
+    "vpc_id": "vpc-demo0001",
+    "protocol": "tcp",
+    "from_port": 3306,
+    "to_port": 3306,
+    "source_type": "ipv4",
+    "source": "0.0.0.0/0",
+    "severity": "HIGH",
+    "category": "public mysql/mariadb exposure",
+    "reason": "Security group exposes MySQL/MariaDB on port 3306 to 0.0.0.0/0.",
+    "rule_description": "synthetic demo rule"
+  },
+  {
+    "group_id": "sg-demo0003",
+    "group_name": "demo-web-sg",
+    "vpc_id": "vpc-demo0002",
+    "protocol": "tcp",
+    "from_port": 80,
+    "to_port": 443,
+    "source_type": "ipv4",
+    "source": "0.0.0.0/0",
+    "severity": "INFO",
+    "category": "public web exposure",
+    "reason": "Security group exposes HTTP/HTTPS to 0.0.0.0/0. Review whether this is intentional.",
+    "rule_description": "synthetic demo web rule"
+  }
+]

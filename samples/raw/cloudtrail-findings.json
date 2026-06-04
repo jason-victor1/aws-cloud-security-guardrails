@@ -1,0 +1,46 @@
+{
+  "findings": [
+    {
+      "trail_name": "ACCOUNT_REGION",
+      "trail_arn": null,
+      "home_region": null,
+      "severity": "HIGH",
+      "finding_type": "no multi-region trail found",
+      "reason": "No CloudTrail trail returned by this region is configured as multi-region.",
+      "evidence": "trails_checked=1"
+    },
+    {
+      "trail_name": "demo-audit-trail",
+      "trail_arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+      "home_region": "us-east-1",
+      "severity": "MEDIUM",
+      "finding_type": "log file validation disabled",
+      "reason": "CloudTrail log file validation is not enabled for this trail.",
+      "evidence": "LogFileValidationEnabled=False"
+    },
+    {
+      "trail_name": "demo-audit-trail",
+      "trail_arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+      "home_region": "us-east-1",
+      "severity": "LOW",
+      "finding_type": "CloudWatch Logs delivery not configured",
+      "reason": "Trail does not show CloudWatch Logs delivery metadata.",
+      "evidence": "CloudWatchLogsLogGroupArn not present"
+    }
+  ],
+  "trail_summaries": [
+    {
+      "trail_name": "demo-audit-trail",
+      "trail_arn": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
+      "home_region": "us-east-1",
+      "is_multi_region": false,
+      "is_logging": true,
+      "log_file_validation_enabled": false,
+      "has_kms_key": true,
+      "s3_bucket_name": "demo-cloudtrail-logs-bucket",
+      "cloudwatch_logs_configured": false,
+      "management_events_enabled": true,
+      "read_write_type": "All"
+    }
+  ]
+}

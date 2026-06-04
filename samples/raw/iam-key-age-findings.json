@@ -1,0 +1,26 @@
+[
+  {
+    "user_name": "demo-ci-user",
+    "access_key_id_suffix": "****DEMO",
+    "status": "Active",
+    "create_date": "2025-01-15T12:00:00+00:00",
+    "age_days": 140,
+    "threshold_days": 90,
+    "exceeds_threshold": true,
+    "last_used_date": "2026-05-01T10:30:00+00:00",
+    "last_used_service": "s3",
+    "last_used_region": "us-east-1"
+  },
+  {
+    "user_name": "demo-readonly-user",
+    "access_key_id_suffix": "****SAFE",
+    "status": "Active",
+    "create_date": "2026-05-01T12:00:00+00:00",
+    "age_days": 30,
+    "threshold_days": 90,
+    "exceeds_threshold": false,
+    "last_used_date": null,
+    "last_used_service": null,
+    "last_used_region": null
+  }
+]
