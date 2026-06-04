@@ -84,6 +84,20 @@ This project includes operational runbooks that connect guardrail detections to 
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`docs/runbooks/credential-exposure-response.md`](docs/runbooks/credential-exposure-response.md) | Defines the response workflow for suspected hardcoded secrets, API keys, AWS credentials, GitHub tokens, and related credential exposure events. |
 
+## Synthetic Demo Workflow
+
+This repository includes synthetic sample fixtures that demonstrate the end-to-end local workflow without AWS credentials or real account data.
+
+```text
+samples/raw/
+→ automation/finding-normalizer.py
+→ samples/normalized/normalized-findings.json
+→ automation/remediation-ticket-generator.py
+→ samples/reports/remediation-backlog.md
+→ automation/executive-summary-generator.py
+→ samples/reports/executive-summary.md
+```
+
 ## Project Phases
 
 ### Phase 0: Documentation Skeleton
