@@ -1,0 +1,32 @@
+name: Sample JSON Validate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  sample-json-validate:
+    name: Sample JSON syntax check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate synthetic sample JSON files
+        run: |
+          python3 -m json.tool samples/raw/iam-key-age-findings.json > /dev/null
+          python3 -m json.tool samples/raw/security-group-findings.json > /dev/null
+          python3 -m json.tool samples/raw/public-s3-findings.json > /dev/null
+          python3 -m json.tool samples/raw/cloudtrail-findings.json > /dev/null
+          python3 -m json.tool samples/normalized/normalized-findings.json > /dev/null
+          python3 -m json.tool samples/reports/remediation-tickets.json > /dev/null
