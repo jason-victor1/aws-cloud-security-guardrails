@@ -21,8 +21,8 @@
         "finding_type": "public bucket policy",
         "evidence": "PolicyStatus.IsPublic=true"
       },
-      "normalized_at": "2026-06-04T04:16:22.500707+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.112878+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0002-CRITICAL-SECURITY-GROUP-RISK-CHECK-SECURITY-GROUP-PUBLIC-SSH-EXPOSURE",
@@ -48,8 +48,8 @@
         "source": "0.0.0.0/0",
         "rule_description": "synthetic demo rule"
       },
-      "normalized_at": "2026-06-04T04:15:12.673942+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.057355+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0003-HIGH-CLOUDTRAIL-COVERAGE-CHECK-CLOUDTRAIL-TRAIL-NO-MULTI-REGION-TRAIL-FOUND",
@@ -69,8 +69,8 @@
         "finding_type": "no multi-region trail found",
         "evidence": "trails_checked=1"
       },
-      "normalized_at": "2026-06-04T04:16:31.081932+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.165726+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0004-HIGH-IAM-KEY-AGE-CHECK-IAM-ACCESS-KEY-LONG-LIVED-IAM-ACCESS-KEY",
@@ -97,8 +97,8 @@
         "create_date": "2025-01-15T12:00:00+00:00",
         "exceeds_threshold": true
       },
-      "normalized_at": "2026-06-04T04:14:55.901761+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:31.967831+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0005-HIGH-PUBLIC-S3-CHECK-AWS-ACCOUNT-INCOMPLETE-ACCOUNT-LEVEL-S3-PUBLIC-ACCESS-BLOCK",
@@ -118,8 +118,8 @@
         "finding_type": "incomplete account-level S3 Public Access Block",
         "evidence": "RestrictPublicBuckets"
       },
-      "normalized_at": "2026-06-04T04:16:22.500707+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.112878+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0006-HIGH-PUBLIC-S3-CHECK-S3-BUCKET-PUBLIC-ACL-GRANT",
@@ -140,8 +140,8 @@
         "finding_type": "public ACL grant",
         "evidence": "AllUsers:READ"
       },
-      "normalized_at": "2026-06-04T04:16:22.500707+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.112878+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0007-HIGH-SECURITY-GROUP-RISK-CHECK-SECURITY-GROUP-PUBLIC-MYSQL-MARIADB-EXPOSURE",
@@ -167,8 +167,8 @@
         "source": "0.0.0.0/0",
         "rule_description": "synthetic demo rule"
       },
-      "normalized_at": "2026-06-04T04:15:12.673942+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.057355+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0008-MEDIUM-CLOUDTRAIL-COVERAGE-CHECK-CLOUDTRAIL-TRAIL-LOG-FILE-VALIDATION-DISABLED",
@@ -190,8 +190,8 @@
         "finding_type": "log file validation disabled",
         "evidence": "LogFileValidationEnabled=False"
       },
-      "normalized_at": "2026-06-04T04:16:31.081932+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.165726+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     },
     {
       "ticket_id": "REM-0009-LOW-CLOUDTRAIL-COVERAGE-CHECK-CLOUDTRAIL-TRAIL-CLOUDWATCH-LOGS-DELIVERY-NOT-CONFIGURED",
@@ -213,8 +213,8 @@
         "finding_type": "CloudWatch Logs delivery not configured",
         "evidence": "CloudWatchLogsLogGroupArn not present"
       },
-      "normalized_at": "2026-06-04T04:16:31.081932+00:00",
-      "generated_at": "2026-06-04T04:17:52.930305+00:00"
+      "normalized_at": "2026-06-09T04:04:32.165726+00:00",
+      "generated_at": "2026-06-09T04:04:32.315403+00:00"
     }
   ]
 }

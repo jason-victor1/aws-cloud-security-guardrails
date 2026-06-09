@@ -98,6 +98,13 @@ samples/raw/
 → samples/reports/executive-summary.md
 ```
 
+````markdown
+The full synthetic demo workflow can be regenerated with:
+
+```bash
+./scripts/regenerate-demo-outputs.sh
+```
+
 ## Project Phases
 
 ### Phase 0: Documentation Skeleton
@@ -123,3 +130,8 @@ Produce sample findings, remediation backlog, executive summary, and evidence ch
 ## Portfolio Value
 
 This project demonstrates the ability to move from cloud security findings to automated guardrails, remediation evidence, and business-readable reporting.
+
+```
+
+```
+````
