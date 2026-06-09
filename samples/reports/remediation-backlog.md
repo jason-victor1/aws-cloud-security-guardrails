@@ -1,6 +1,6 @@
 # Remediation Backlog
 
-Generated at: `2026-06-04T04:17:43.264271+00:00`
+Generated at: `2026-06-09T04:04:32.264139+00:00`
 
 Ticket count: `9`
 
@@ -29,8 +29,8 @@ Ticket count: `9`
 | Resource Name | demo-public-assets-bucket |
 | Region | us-east-1 |
 | Finding Type | `public_bucket_policy` |
-| Normalized At | 2026-06-04T04:16:22.500707+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.112878+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -73,8 +73,8 @@ Review the bucket policy, remove unintended public principals, and confirm that 
 | Resource Name | demo-public-admin-sg |
 | Region | N/A |
 | Finding Type | `public_ssh_exposure` |
-| Normalized At | 2026-06-04T04:15:12.673942+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.057355+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -124,8 +124,8 @@ Restrict SSH exposure to approved administrative CIDRs, use a VPN or bastion pat
 | Resource Name | ACCOUNT_REGION |
 | Region | N/A |
 | Finding Type | `no_multi-region_trail_found` |
-| Normalized At | 2026-06-04T04:16:31.081932+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.165726+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -167,8 +167,8 @@ Configure at least one multi-region trail so activity across enabled AWS Regions
 | Resource Name | demo-ci-user |
 | Region | N/A |
 | Finding Type | `long_lived_iam_access_key` |
-| Normalized At | 2026-06-04T04:14:55.901761+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:31.967831+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -217,8 +217,8 @@ Review whether this IAM access key is still required. Rotate or retire long-live
 | Resource Name | ACCOUNT_LEVEL |
 | Region | N/A |
 | Finding Type | `incomplete_account-level_S3_Public_Access_Block` |
-| Normalized At | 2026-06-04T04:16:22.500707+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.112878+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -260,8 +260,8 @@ Enable all four account-level S3 Public Access Block settings unless a documente
 | Resource Name | demo-legacy-acl-bucket |
 | Region | us-west-2 |
 | Finding Type | `public_ACL_grant` |
-| Normalized At | 2026-06-04T04:16:22.500707+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.112878+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -304,8 +304,8 @@ Review the S3 exposure finding, confirm whether public access is intentional, an
 | Resource Name | demo-db-sg |
 | Region | N/A |
 | Finding Type | `public_mysql/mariadb_exposure` |
-| Normalized At | 2026-06-04T04:15:12.673942+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.057355+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -355,8 +355,8 @@ Remove public database exposure. Restrict access to application security groups,
 | Resource Name | demo-audit-trail |
 | Region | us-east-1 |
 | Finding Type | `log_file_validation_disabled` |
-| Normalized At | 2026-06-04T04:16:31.081932+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.165726+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 
@@ -402,8 +402,8 @@ Enable CloudTrail log file validation to support integrity verification of deliv
 | Resource Name | demo-audit-trail |
 | Region | us-east-1 |
 | Finding Type | `CloudWatch_Logs_delivery_not_configured` |
-| Normalized At | 2026-06-04T04:16:31.081932+00:00 |
-| Generated At | 2026-06-04T04:17:43.263906+00:00 |
+| Normalized At | 2026-06-09T04:04:32.165726+00:00 |
+| Generated At | 2026-06-09T04:04:32.263647+00:00 |
 
 **Reason**
 

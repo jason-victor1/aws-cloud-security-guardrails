@@ -133,6 +133,23 @@ python3 automation/executive-summary-generator.py \
   --output samples/reports/executive-summary.md
 ```
 
+## One-Command Regeneration
+
+From repo root, regenerate all demo outputs with:
+
+```bash
+./scripts/regenerate-demo-outputs.sh
+
+The script regenerates:
+
+samples/normalized/normalized-findings.json
+samples/reports/remediation-backlog.md
+samples/reports/remediation-tickets.json
+samples/reports/executive-summary.md
+
+The script is local-only and demo-only. It uses synthetic files under samples/, does not require AWS credentials, does not call AWS APIs, and does not deploy infrastructure.
+```
+
 ## Expected Demo Outputs
 
 After regeneration, the demo output files should exist:
