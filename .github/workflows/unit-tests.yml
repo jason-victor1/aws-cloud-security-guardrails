@@ -1,0 +1,29 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    name: Local workflow processor tests
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_GUARDRAILS_FIXED_TIMESTAMP: "2026-01-01T00:00:00+00:00"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Run local workflow processor tests
+        run: python3 -m unittest discover -s tests -p "test_*.py"
