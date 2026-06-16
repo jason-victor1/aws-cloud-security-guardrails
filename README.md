@@ -76,6 +76,17 @@ This project includes detection-only automation scripts.
 | [`automation/remediation-ticket-generator.py`](automation/remediation-ticket-generator.py) | Converts normalized findings into structured Markdown or JSON remediation tickets for backlog creation and audit evidence workflows.                                                                 |
 | [`automation/executive-summary-generator.py`](automation/executive-summary-generator.py)   | Generates a client-style Markdown executive summary from normalized findings, including severity counts, top risks, affected resource types, remediation themes, and recommended next actions.       |     |
 
+
+## Local Tests
+
+Local workflow processor tests are available under [`tests/`](tests/).
+
+Run:
+
+```bash
+python3 -m unittest discover -s tests -p "test_*.py"
+```
+
 ## Runbooks
 
 This project includes operational runbooks that connect guardrail detections to response workflows.
@@ -135,3 +146,4 @@ This project demonstrates the ability to move from cloud security findings to au
 
 ```
 ````
+`````
