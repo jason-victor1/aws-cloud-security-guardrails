@@ -150,6 +150,20 @@ samples/reports/executive-summary.md
 The script is local-only and demo-only. It uses synthetic files under samples/, does not require AWS credentials, does not call AWS APIs, and does not deploy infrastructure.
 ```
 
+## Deterministic Demo Timestamp
+
+The regeneration script uses a fixed timestamp by default so committed demo outputs remain reproducible in CI.
+
+Default timestamp:
+
+```text
+2026-01-01T00:00:00+00:00
+
+Override it locally with:
+
+AWS_GUARDRAILS_FIXED_TIMESTAMP="2026-06-01T00:00:00+00:00" ./scripts/regenerate-demo-outputs.sh
+```
+
 ## Expected Demo Outputs
 
 After regeneration, the demo output files should exist:
