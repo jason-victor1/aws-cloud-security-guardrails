@@ -1,0 +1,32 @@
+name: Demo Regeneration Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  demo-regeneration-check:
+    name: Synthetic demo regeneration drift check
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_GUARDRAILS_FIXED_TIMESTAMP: "2026-01-01T00:00:00+00:00"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Regenerate synthetic demo outputs
+        run: ./scripts/regenerate-demo-outputs.sh
+
+      - name: Check for demo output drift
+        run: git diff --exit-code samples/normalized samples/reports

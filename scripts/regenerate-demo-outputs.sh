@@ -20,6 +20,9 @@ require_dir() {
 
 echo "Starting synthetic demo output regeneration..."
 
+export AWS_GUARDRAILS_FIXED_TIMESTAMP="${AWS_GUARDRAILS_FIXED_TIMESTAMP:-2026-01-01T00:00:00+00:00}"
+echo "Using demo timestamp: ${AWS_GUARDRAILS_FIXED_TIMESTAMP}"
+
 require_command python3
 
 # Confirm script is being run from the repository root.

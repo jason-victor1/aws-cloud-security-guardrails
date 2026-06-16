@@ -53,6 +53,7 @@ Examples:
 
 from __future__ import annotations
 
+import os
 import argparse
 import json
 import sys
@@ -108,6 +109,9 @@ def parse_args() -> argparse.Namespace:
 
 
 def utc_now() -> str:
+    fixed_timestamp = os.environ.get("AWS_GUARDRAILS_FIXED_TIMESTAMP")
+    if fixed_timestamp:
+        return fixed_timestamp
     return datetime.now(timezone.utc).isoformat()
 
 

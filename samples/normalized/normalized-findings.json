@@ -4,7 +4,7 @@
   "findings": [
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:31.967831+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "iam-key-age-check",
       "resource_type": "iam_access_key",
       "resource_id": "****DEMO",
@@ -41,7 +41,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:31.967831+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "iam-key-age-check",
       "resource_type": "iam_access_key",
       "resource_id": "****SAFE",
@@ -78,7 +78,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.057355+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "security-group-risk-check",
       "resource_type": "security_group",
       "resource_id": "sg-demo0001",
@@ -116,7 +116,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.057355+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "security-group-risk-check",
       "resource_type": "security_group",
       "resource_id": "sg-demo0002",
@@ -154,7 +154,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.057355+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "security-group-risk-check",
       "resource_type": "security_group",
       "resource_id": "sg-demo0003",
@@ -192,7 +192,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.112878+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "public-s3-check",
       "resource_type": "s3_bucket",
       "resource_id": "demo-public-assets-bucket",
@@ -219,7 +219,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.112878+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "public-s3-check",
       "resource_type": "aws_account",
       "resource_id": "ACCOUNT_LEVEL",
@@ -246,7 +246,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.112878+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "public-s3-check",
       "resource_type": "s3_bucket",
       "resource_id": "demo-legacy-acl-bucket",
@@ -273,7 +273,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.165726+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "cloudtrail-coverage-check",
       "resource_type": "cloudtrail_trail",
       "resource_id": "ACCOUNT_REGION",
@@ -302,7 +302,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.165726+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "cloudtrail-coverage-check",
       "resource_type": "cloudtrail_trail",
       "resource_id": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
@@ -331,7 +331,7 @@
     },
     {
       "schema_version": "1.0",
-      "normalized_at": "2026-06-09T04:04:32.165726+00:00",
+      "normalized_at": "2026-01-01T00:00:00+00:00",
       "source": "cloudtrail-coverage-check",
       "resource_type": "cloudtrail_trail",
       "resource_id": "arn:aws:cloudtrail:us-east-1:123456789012:trail/demo-audit-trail",
