@@ -76,7 +76,6 @@ This project includes detection-only automation scripts.
 | [`automation/remediation-ticket-generator.py`](automation/remediation-ticket-generator.py) | Converts normalized findings into structured Markdown or JSON remediation tickets for backlog creation and audit evidence workflows.                                                                 |
 | [`automation/executive-summary-generator.py`](automation/executive-summary-generator.py)   | Generates a client-style Markdown executive summary from normalized findings, including severity counts, top risks, affected resource types, remediation themes, and recommended next actions.       |     |
 
-
 ## Local Tests
 
 Local workflow processor tests are available under [`tests/`](tests/).
@@ -86,6 +85,15 @@ Run:
 ```bash
 python3 -m unittest discover -s tests -p "test_*.py"
 ```
+
+## Read-Only Assessment Policy
+
+A read-only IAM assessment policy example is available for running the AWS posture review scripts without administrator access:
+
+- [`docs/iam/read-only-assessment-policy.md`](docs/iam/read-only-assessment-policy.md)
+- [`docs/iam/read-only-assessment-policy.json`](docs/iam/read-only-assessment-policy.json)
+
+The policy is intended for lab and portfolio validation of the read-only scripts. It does not grant permissions to create, modify, delete, deploy, or remediate AWS resources.
 
 ## Runbooks
 
@@ -146,4 +154,7 @@ This project demonstrates the ability to move from cloud security findings to au
 
 ```
 ````
-`````
+
+```
+
+```
