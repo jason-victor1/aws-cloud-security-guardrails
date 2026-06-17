@@ -150,11 +150,11 @@ Produce sample findings, remediation backlog, executive summary, and evidence ch
 
 This project demonstrates the ability to move from cloud security findings to automated guardrails, remediation evidence, and business-readable reporting.
 
-```
+## Live AWS Lab Validation
 
-```
+A live-lab validation guide is available for safely running the read-only AWS posture review scripts against a controlled AWS lab account:
+
+- [`docs/workflows/live-aws-lab-validation.md`](docs/workflows/live-aws-lab-validation.md)
+
+The guide covers pre-run safety checks, read-only profile verification, script execution order, raw output handling, redaction rules, sanitized evidence, and no-change confirmation.
 ````
-
-```
-
-```
