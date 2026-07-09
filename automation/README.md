@@ -209,7 +209,7 @@ python automation/public-s3-check.py --profile lab-profile --format table
 With an explicit account ID:
 
 ```bash
-python automation/public-s3-check.py --account-id 123456789012 --format table
+python automation/public-s3-check.py --account-id <ACCOUNT_ID> --format table
 ```
 
 JSON output:
