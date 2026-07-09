@@ -591,20 +591,19 @@ def main() -> int:
             skip_event_history_check=args.skip_event_history_check,
         )
 
+        high_or_critical_count = sum(
+            1 for finding in findings if finding.severity in {"HIGH", "CRITICAL"}
+        )
+
         if args.format == "json":
             print_json(findings, summaries)
         else:
             print_findings_table(findings)
             print_summaries_table(summaries)
-
-        high_or_critical_count = sum(
-            1 for finding in findings if finding.severity in {"HIGH", "CRITICAL"}
-        )
-
-        print(
-            f"\nSummary: {len(findings)} finding(s), "
-            f"{high_or_critical_count} high/critical finding(s)."
-        )
+            print(
+                f"\nSummary: {len(findings)} finding(s), "
+                f"{high_or_critical_count} high/critical finding(s)."
+            )
 
         if args.fail_on_findings and high_or_critical_count > 0:
             return 1

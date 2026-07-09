@@ -14,7 +14,7 @@ Security model:
 Example:
     python automation/public-s3-check.py --format table
     python automation/public-s3-check.py --profile lab-profile --format json
-    python automation/public-s3-check.py --account-id 123456789012 --format table
+    python automation/public-s3-check.py --account-id <ACCOUNT_ID> --format table
 """
 
 from __future__ import annotations
@@ -474,19 +474,18 @@ def main() -> int:
         account_id = get_account_id(session, args.account_id)
         findings = build_findings(session=session, account_id=account_id)
 
-        if args.format == "json":
-            print_json(findings)
-        else:
-            print_table(findings)
-
         high_or_critical_count = sum(
             1 for finding in findings if finding.severity in {"HIGH", "CRITICAL"}
         )
 
-        print(
-            f"\nSummary: {len(findings)} finding(s), "
-            f"{high_or_critical_count} high/critical finding(s)."
-        )
+        if args.format == "json":
+            print_json(findings)
+        else:
+            print_table(findings)
+            print(
+                f"\nSummary: {len(findings)} finding(s), "
+                f"{high_or_critical_count} high/critical finding(s)."
+            )
 
         if args.fail_on_findings and high_or_critical_count > 0:
             return 1

@@ -25,5 +25,8 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install automation dependencies
+        run: python -m pip install -r automation/requirements.txt
+
       - name: Run local workflow processor tests
         run: python3 -m unittest discover -s tests -p "test_*.py"

@@ -226,15 +226,17 @@ def main() -> int:
             include_last_used=args.include_last_used,
         )
 
+        flagged_count = sum(
+            1 for finding in findings if finding.exceeds_threshold
+        )
+
         if args.format == "json":
             print_json(findings)
         else:
             print_table(findings)
-
-        flagged_count = sum(
-            1 for finding in findings if finding.exceeds_threshold)
-        print(
-            f"\nSummary: {flagged_count} key(s) older than {args.threshold_days} days.")
+            print(
+                f"\nSummary: {flagged_count} key(s) older than {args.threshold_days} days."
+            )
 
         return 1 if flagged_count > 0 else 0
 

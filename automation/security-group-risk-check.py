@@ -388,17 +388,19 @@ def main() -> int:
             broad_range_threshold=args.broad_range_threshold,
         )
 
+        flagged_count = sum(
+            1 for finding in findings if finding.exceeds_threshold
+        )
+
         if args.format == "json":
             print_json(findings)
         else:
             print_table(findings)
+            print(
+                f"\nSummary: {flagged_count} key(s) older than {args.threshold_days} days."
+            )
 
-        print(f"\nSummary: {len(findings)} risky public ingress finding(s).")
-
-        if args.fail_on_findings and findings:
-            return 1
-
-        return 0
+        return 1 if flagged_count > 0 else 0
 
     except ProfileNotFound as error:
         print(f"ERROR: AWS profile not found: {error}", file=sys.stderr)
