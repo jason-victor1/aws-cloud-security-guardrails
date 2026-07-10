@@ -124,6 +124,21 @@ The full synthetic demo workflow can be regenerated with:
 ./scripts/regenerate-demo-outputs.sh
 ```
 
+## Local Assessment Orchestrator
+
+A local orchestrator is available for running the full AWS guardrails assessment pipeline from one command:
+
+- [`scripts/run-guardrails-assessment.sh`](scripts/run-guardrails-assessment.sh)
+
+Example:
+
+```bash
+scripts/run-guardrails-assessment.sh \
+  --profile guardrails-readonly \
+  --output-dir ~/aws-guardrails-lab-evidence/orchestrated-run \
+  --region us-east-1
+```
+
 ## Project Phases
 
 ### Phase 0: Documentation Skeleton
@@ -157,4 +172,8 @@ A live-lab validation guide is available for safely running the read-only AWS po
 - [`docs/workflows/live-aws-lab-validation.md`](docs/workflows/live-aws-lab-validation.md)
 
 The guide covers pre-run safety checks, read-only profile verification, script execution order, raw output handling, redaction rules, sanitized evidence, and no-change confirmation.
+
+```
+
+```
 ````
