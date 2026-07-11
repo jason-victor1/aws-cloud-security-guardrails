@@ -194,7 +194,3 @@ A live-lab validation guide is available for safely running the read-only AWS po
 - [`docs/workflows/live-aws-lab-validation.md`](docs/workflows/live-aws-lab-validation.md)
 
 The guide covers pre-run safety checks, read-only profile verification, script execution order, raw output handling, redaction rules, sanitized evidence, and no-change confirmation.
-
-```
-
-```
