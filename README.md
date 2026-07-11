@@ -139,6 +139,29 @@ scripts/run-guardrails-assessment.sh \
   --region us-east-1
 ```
 
+### Synthetic Orchestrator Mode
+
+The local assessment orchestrator also supports a synthetic mode for validating the downstream workflow without AWS credentials or AWS API calls.
+
+Example:
+
+```bash
+scripts/run-guardrails-assessment.sh \
+  --mode synthetic \
+  --output-dir ~/aws-guardrails-lab-evidence/synthetic-orchestrator-test
+```
+
+Synthetic mode uses the existing sample fixtures under samples/raw/, writes generated artifacts outside the repository, runs normalization and reporting, and prints a sanitized workflow-level summary.
+
+Live mode remains available for controlled read-only AWS lab validation:
+
+```bash
+scripts/run-guardrails-assessment.sh \
+  --profile guardrails-readonly \
+  --output-dir ~/aws-guardrails-lab-evidence/orchestrated-run \
+  --region us-east-1
+```
+
 ## Project Phases
 
 ### Phase 0: Documentation Skeleton
