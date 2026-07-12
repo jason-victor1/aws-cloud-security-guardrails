@@ -1,65 +1,148 @@
 # AWS Cloud Security Guardrails
 
-## Purpose
+Validation-first AWS security assessment toolkit for read-only posture review, finding normalization, remediation reporting, executive summaries, and CI-enforced guardrail validation.
 
-This project demonstrates a practical AWS cloud security guardrails workflow for identifying and reducing common cloud security risks:
+## Project Status
 
-- leaked credentials
-- over-permissive IAM
-- public exposure
-- missing logging and detection coverage
-- weak CI/CD controls
-- cloud cost-abuse risk
-- weak compliance evidence
+| Area | Status |
+|---|---|
+| Portfolio-ready V1 | Complete |
+| Synthetic demo workflow | Complete |
+| Read-only live-lab validation | Complete |
+| Local assessment orchestrator | Complete |
+| Synthetic orchestrator mode | Complete |
+| CI-enforced synthetic orchestrator validation | Complete |
+| Automated remediation | Not included in V1 |
 
-The project is designed as a portfolio-grade lab for cloud security, DevSecOps, and security automation contract work.
+This repository is designed as a portfolio-grade cloud security, DevSecOps, and security automation project. It focuses on safe assessment, evidence handling, and repeatable reporting rather than production remediation.
 
-## Problem
+## What This Project Does
 
-Many AWS security failures come from preventable control gaps:
+AWS Cloud Security Guardrails demonstrates a practical workflow for identifying and reducing common AWS security risks:
 
-- long-lived or leaked AWS access keys
-- overly permissive IAM policies
-- public S3 buckets or exposed network paths
-- missing CloudTrail, GuardDuty, Security Hub, or AWS Config coverage
-- weak GitHub Actions and CI/CD token hygiene
-- no repeatable evidence trail for remediation or audit readiness
+- long-lived IAM access keys
+- risky public security group ingress
+- public S3 exposure paths
+- weak or incomplete CloudTrail coverage
+- weak CI/CD and repository guardrails
+- missing evidence trails for remediation and audit readiness
 
-## What This Lab Builds
+The project converts assessment results into normalized findings, remediation backlog artifacts, remediation ticket JSON, and executive summaries.
 
-This lab includes:
+## Quick Start: Synthetic Mode
 
-- Terraform security baselines
-- CI/CD security checks
-- AWS identity and exposure review scripts
-- sample findings
-- remediation backlog templates
-- executive summary template
-- control matrix
-- incident response runbook
-- audit evidence checklist
+Synthetic mode validates the downstream workflow without AWS credentials or live AWS API calls.
 
-## Target Buyer Problems
+```bash
+scripts/run-guardrails-assessment.sh \
+  --mode synthetic \
+  --output-dir ~/aws-guardrails-lab-evidence/synthetic-orchestrator-test
+```
 
-This project maps to contractor needs in:
+Synthetic mode uses sample fixtures from `samples/raw/`, writes generated artifacts outside the repository, validates JSON outputs, runs normalization, and generates reports.
+
+## Live-Lab Mode
+
+Live mode is intended for controlled read-only AWS lab validation.
+
+```bash
+scripts/run-guardrails-assessment.sh \
+  --profile guardrails-readonly \
+  --output-dir ~/aws-guardrails-lab-evidence/orchestrated-run \
+  --region us-east-1
+```
+
+Live mode requires an explicit AWS profile and writes raw outputs, normalized findings, and generated reports outside the repository.
+
+## Capabilities
+
+| Capability | Implementation |
+|---|---|
+| IAM access key age review | `automation/iam-key-age-check.py` |
+| Security group exposure review | `automation/security-group-risk-check.py` |
+| Public S3 posture review | `automation/public-s3-check.py` |
+| CloudTrail coverage review | `automation/cloudtrail-coverage-check.py` |
+| Finding normalization | `automation/finding-normalizer.py` |
+| Remediation backlog generation | `automation/remediation-ticket-generator.py` |
+| Executive summary generation | `automation/executive-summary-generator.py` |
+| Full local orchestration | `scripts/run-guardrails-assessment.sh` |
+| Synthetic fixture validation | `samples/raw/` and synthetic orchestrator mode |
+| Terraform guardrail baseline | `terraform/` |
+| CI/CD validation | `.github/workflows/` |
+| Sanitized evidence notes | `evidence/` |
+
+## Validation and CI Controls
+
+The main branch is protected by required GitHub Actions checks:
+
+| Check | Purpose |
+|---|---|
+| Terraform fmt, validate, and IaC scan | Validates Terraform and scans IaC with Checkov |
+| Gitleaks secret scan | Detects committed secrets |
+| Python automation syntax check | Compiles automation scripts |
+| Sample JSON syntax check | Validates sample JSON fixtures and generated JSON |
+| Synthetic demo regeneration drift check | Confirms demo outputs can be regenerated consistently |
+| Local workflow processor tests | Runs local unit tests |
+| Synthetic orchestrator validation | Runs the full synthetic orchestrator pipeline in CI |
+
+## Safety Boundary
+
+This project is assessment-focused. V1 does not perform automated remediation.
+
+Do not commit:
+
+- AWS credentials
+- AWS account IDs
+- real ARNs
+- IAM names from real accounts
+- bucket names from real accounts
+- security group IDs
+- VPC or subnet IDs
+- CloudTrail ARNs
+- raw live-lab JSON outputs
+- normalized live-lab findings
+- generated live-lab reports
+- Terraform state
+- AWS CLI credential files
+- `.env` files
+
+## Evidence and Documentation
+
+| Resource | Purpose |
+|---|---|
+| [`docs/iam/read-only-assessment-policy.md`](docs/iam/read-only-assessment-policy.md) | Read-only IAM policy guidance |
+| [`docs/iam/read-only-assessment-policy.json`](docs/iam/read-only-assessment-policy.json) | Example read-only assessment policy |
+| [`docs/workflows/live-aws-lab-validation.md`](docs/workflows/live-aws-lab-validation.md) | Live-lab validation workflow |
+| [`evidence/live-lab-validation/`](evidence/live-lab-validation/) | Sanitized live-lab validation notes |
+| [`evidence/live-lab-reporting/`](evidence/live-lab-reporting/) | Sanitized live-lab reporting notes |
+| [`docs/runbooks/credential-exposure-response.md`](docs/runbooks/credential-exposure-response.md) | Credential exposure response runbook |
+
+## Target Use Cases
+
+This project maps to practical cloud security and DevSecOps work:
 
 - AWS cloud security hardening
-- DevSecOps / CI/CD security
-- security automation
-- IAM and credential risk reduction
-- compliance evidence readiness
+- IAM and credential risk review
+- public exposure reduction
+- cloud logging and audit-readiness validation
+- CI/CD security guardrails
+- security automation reporting
+- contractor/consultant evidence packages
 
 ## Repo Structure
 
 ```text
 aws-cloud-security-guardrails/
-  README.md
-  docs/
-  terraform/
-  github-actions/
+  .github/workflows/
   automation/
-  sample-findings/
   diagrams/
+  docs/
+  evidence/
+  samples/
+  scripts/
+  terraform/
+  tests/
+  README.md
 ```
 
 ## Automation
