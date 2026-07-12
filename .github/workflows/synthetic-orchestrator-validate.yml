@@ -1,0 +1,80 @@
+name: Synthetic Orchestrator Validate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-orchestrator-validate:
+    name: Synthetic orchestrator validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install automation dependencies
+        run: python -m pip install -r automation/requirements.txt
+
+      - name: Validate orchestrator shell syntax
+        run: bash -n scripts/run-guardrails-assessment.sh
+
+      - name: Run synthetic orchestrator
+        run: |
+          scripts/run-guardrails-assessment.sh \
+            --mode synthetic \
+            --output-dir "$RUNNER_TEMP/aws-guardrails-synthetic-orchestrator"
+
+      - name: Validate expected output files
+        run: |
+          OUTPUT_DIR="$RUNNER_TEMP/aws-guardrails-synthetic-orchestrator"
+
+          test -f "$OUTPUT_DIR/raw/iam-key-age-findings.json"
+          test -f "$OUTPUT_DIR/raw/security-group-findings.json"
+          test -f "$OUTPUT_DIR/raw/public-s3-findings.json"
+          test -f "$OUTPUT_DIR/raw/cloudtrail-findings.json"
+
+          test -f "$OUTPUT_DIR/normalized/iam-key-age-normalized.json"
+          test -f "$OUTPUT_DIR/normalized/security-group-normalized.json"
+          test -f "$OUTPUT_DIR/normalized/public-s3-normalized.json"
+          test -f "$OUTPUT_DIR/normalized/cloudtrail-normalized.json"
+          test -f "$OUTPUT_DIR/normalized/combined-normalized-findings.json"
+
+          test -f "$OUTPUT_DIR/reports/remediation-backlog.md"
+          test -f "$OUTPUT_DIR/reports/remediation-tickets.json"
+          test -f "$OUTPUT_DIR/reports/executive-summary.md"
+
+          test -f "$OUTPUT_DIR/notes/synthetic-mode-notes.txt"
+
+      - name: Validate generated JSON
+        run: |
+          OUTPUT_DIR="$RUNNER_TEMP/aws-guardrails-synthetic-orchestrator"
+
+          python -m json.tool "$OUTPUT_DIR/raw/iam-key-age-findings.json" > /dev/null
+          python -m json.tool "$OUTPUT_DIR/raw/security-group-findings.json" > /dev/null
+          python -m json.tool "$OUTPUT_DIR/raw/public-s3-findings.json" > /dev/null
+          python -m json.tool "$OUTPUT_DIR/raw/cloudtrail-findings.json" > /dev/null
+
+          python -m json.tool "$OUTPUT_DIR/normalized/combined-normalized-findings.json" > /dev/null
+          python -m json.tool "$OUTPUT_DIR/reports/remediation-tickets.json" > /dev/null
+
+      - name: Confirm synthetic mode did not require AWS credentials
+        run: |
+          OUTPUT_DIR="$RUNNER_TEMP/aws-guardrails-synthetic-orchestrator"
+
+          grep -q "aws-api-calls-used: no" "$OUTPUT_DIR/notes/synthetic-mode-notes.txt"
+          grep -q "aws-profile-required: no" "$OUTPUT_DIR/notes/synthetic-mode-notes.txt"
+
+          if test -f "$OUTPUT_DIR/notes/sts-caller-identity.raw.json"; then
+            echo "ERROR: STS caller identity file should not be created in synthetic mode."
+            exit 1
+          fi
