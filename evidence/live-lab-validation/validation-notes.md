@@ -8,15 +8,33 @@ No raw live-lab outputs are included in this repository.
 
 ## Validation Metadata
 
-| Field                        | Value                                       |
-| ---------------------------- | ------------------------------------------- |
-| Validation date              | `<YYYY-MM-DD>`                              |
-| AWS account type             | Controlled lab account                      |
-| Assessment principal         | Dedicated read-only assessment principal    |
-| Assessment policy used       | `docs/iam/read-only-assessment-policy.json` |
-| Raw output storage location  | Outside repository                          |
-| Sanitized evidence committed | Yes                                         |
-| Raw output committed         | No                                          |
+| Field                         | Value                                        |
+| ----------------------------- | -------------------------------------------- |
+| Validation date               | `2026-07-06`                                 |
+| Validation timezone           | `America/New_York (EDT, UTC-04:00)`          |
+| AWS account type              | Controlled lab account                       |
+| Assessment principal          | Dedicated read-only assessment principal     |
+| Assessment policy used        | `docs/iam/read-only-assessment-policy.json`  |
+| Raw output storage location   | Outside repository                           |
+| Raw evidence visibility       | Private                                      |
+| Sanitized evidence visibility | Public                                       |
+| Raw artifact timestamp range  | `2026-07-06 23:54:53` through `23:55:58 EDT` |
+| Sanitized evidence committed  | `2026-07-07`                                 |
+| Raw output committed          | No                                           |
+
+### Provenance Basis
+
+The controlled live AWS validation date is supported by filesystem modification
+metadata from the original four retained raw JSON output artifacts. Those
+artifacts were written or last modified between `2026-07-06 23:54:53 EDT` and
+`2026-07-06 23:55:58 EDT`.
+
+This timestamp range is corroborated by the subsequent sanitized evidence commit
+and validation pull-request chronology.
+
+The filesystem timestamps establish when the retained raw output artifacts were
+written or last modified. They do not establish the exact timestamps of the
+underlying AWS API operations.
 
 ## Pre-Run Safety Checklist
 
