@@ -87,6 +87,13 @@ The main branch is protected by required GitHub Actions checks:
 | Local workflow processor tests          | Runs local unit tests                                 |
 | Synthetic orchestrator validation       | Runs the full synthetic orchestrator pipeline in CI   |
 
+## Validation Metadata
+
+| Validation scope                             | Date         | Evidence boundary                                                        |
+| -------------------------------------------- | ------------ | ------------------------------------------------------------------------ |
+| Controlled read-only AWS live-lab validation | `2026-07-06` | Raw evidence retained privately; sanitized validation evidence published |
+| Detector behavioral validation               | `2026-09-06` | Public deterministic tests and required GitHub Actions CI                |
+
 ## Safety Boundary
 
 This project is assessment-focused. V1 does not perform automated remediation.
