@@ -4,28 +4,30 @@ Validation-first AWS security assessment toolkit for read-only posture review, f
 
 ## Project Status
 
-| Area | Status |
-|---|---|
-| Portfolio-ready V1 | Complete |
-| Synthetic demo workflow | Complete |
-| Read-only live-lab validation | Complete |
-| Local assessment orchestrator | Complete |
-| Synthetic orchestrator mode | Complete |
-| CI-enforced synthetic orchestrator validation | Complete |
-| Automated remediation | Not included in V1 |
+| Area                                          | Status             |
+| --------------------------------------------- | ------------------ |
+| Portfolio-ready V1                            | Complete           |
+| Synthetic demo workflow                       | Complete           |
+| Read-only live-lab validation                 | Complete           |
+| Local assessment orchestrator                 | Complete           |
+| Synthetic orchestrator mode                   | Complete           |
+| CI-enforced synthetic orchestrator validation | Complete           |
+| Automated remediation                         | Not included in V1 |
 
 This repository is designed as a portfolio-grade cloud security, DevSecOps, and security automation project. It focuses on safe assessment, evidence handling, and repeatable reporting rather than production remediation.
 
 ## What This Project Does
 
-AWS Cloud Security Guardrails demonstrates a practical workflow for identifying and reducing common AWS security risks:
+AWS Cloud Security Guardrails demonstrates a practical workflow for identifying,
+assessing, and documenting common AWS security risks, with selected preventive
+guardrail examples:
 
 - long-lived IAM access keys
 - risky public security group ingress
 - public S3 exposure paths
 - weak or incomplete CloudTrail coverage
 - weak CI/CD and repository guardrails
-- missing evidence trails for remediation and audit readiness
+- missing evidence trails for remediation and security assurance
 
 The project converts assessment results into normalized findings, remediation backlog artifacts, remediation ticket JSON, and executive summaries.
 
@@ -56,34 +58,34 @@ Live mode requires an explicit AWS profile and writes raw outputs, normalized fi
 
 ## Capabilities
 
-| Capability | Implementation |
-|---|---|
-| IAM access key age review | `automation/iam-key-age-check.py` |
-| Security group exposure review | `automation/security-group-risk-check.py` |
-| Public S3 posture review | `automation/public-s3-check.py` |
-| CloudTrail coverage review | `automation/cloudtrail-coverage-check.py` |
-| Finding normalization | `automation/finding-normalizer.py` |
-| Remediation backlog generation | `automation/remediation-ticket-generator.py` |
-| Executive summary generation | `automation/executive-summary-generator.py` |
-| Full local orchestration | `scripts/run-guardrails-assessment.sh` |
-| Synthetic fixture validation | `samples/raw/` and synthetic orchestrator mode |
-| Terraform guardrail baseline | `terraform/` |
-| CI/CD validation | `.github/workflows/` |
-| Sanitized evidence notes | `evidence/` |
+| Capability                     | Implementation                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------- |
+| IAM access key age review      | `automation/iam-key-age-check.py`                                                   |
+| Security group exposure review | `automation/security-group-risk-check.py`                                           |
+| Public S3 posture review       | `automation/public-s3-check.py`                                                     |
+| CloudTrail coverage review     | `automation/cloudtrail-coverage-check.py`                                           |
+| Finding normalization          | `automation/finding-normalizer.py`                                                  |
+| Remediation backlog generation | `automation/remediation-ticket-generator.py`                                        |
+| Executive summary generation   | `automation/executive-summary-generator.py`                                         |
+| Full local orchestration       | `scripts/run-guardrails-assessment.sh`                                              |
+| Synthetic fixture validation   | `samples/raw/` and synthetic orchestrator mode                                      |
+| Terraform guardrails           | S3 Public Access Block implementation plus design-stage concepts under `terraform/` |
+| CI/CD validation               | `.github/workflows/`                                                                |
+| Sanitized evidence notes       | `evidence/`                                                                         |
 
 ## Validation and CI Controls
 
 The main branch is protected by required GitHub Actions checks:
 
-| Check | Purpose |
-|---|---|
-| Terraform fmt, validate, and IaC scan | Validates Terraform and scans IaC with Checkov |
-| Gitleaks secret scan | Detects committed secrets |
-| Python automation syntax check | Compiles automation scripts |
-| Sample JSON syntax check | Validates sample JSON fixtures and generated JSON |
+| Check                                   | Purpose                                               |
+| --------------------------------------- | ----------------------------------------------------- |
+| Terraform fmt, validate, and IaC scan   | Validates Terraform and scans IaC with Checkov        |
+| Gitleaks secret scan                    | Detects committed secrets                             |
+| Python automation syntax check          | Compiles automation scripts                           |
+| Sample JSON syntax check                | Validates sample JSON fixtures and generated JSON     |
 | Synthetic demo regeneration drift check | Confirms demo outputs can be regenerated consistently |
-| Local workflow processor tests | Runs local unit tests |
-| Synthetic orchestrator validation | Runs the full synthetic orchestrator pipeline in CI |
+| Local workflow processor tests          | Runs local unit tests                                 |
+| Synthetic orchestrator validation       | Runs the full synthetic orchestrator pipeline in CI   |
 
 ## Safety Boundary
 
@@ -106,15 +108,55 @@ Do not commit:
 - AWS CLI credential files
 - `.env` files
 
+## Limitations and Evidence Boundaries
+
+This repository demonstrates a controlled portfolio and lab implementation. Its
+evidence should be interpreted within the following boundaries:
+
+1. **Not a production AWS deployment.** The documented live validation used a
+   controlled read-only AWS lab and does not establish production deployment,
+   enterprise-scale operation, or multi-account landing-zone coverage.
+
+2. **Assessment and reporting are the primary V1 automation scope.** Findings
+   are converted into reporting and remediation-tracking artifacts for human
+   review and action. V1 does not perform unattended or destructive remediation
+   of AWS resources.
+
+3. **Terraform implementation is intentionally mixed-state.** The S3 Public
+   Access Block guardrail is implemented and statically validated. The
+   CloudTrail, GuardDuty, Security Hub, AWS Config, budget/anomaly, and IAM
+   least-privilege Terraform directories remain design-stage placeholders.
+
+4. **The S3 Terraform guardrail was not applied in the documented live AWS
+   validation.** The project therefore does not claim that this Terraform
+   configuration was deployed or that it empirically prevented public S3
+   exposure.
+
+5. **Raw live AWS evidence remains private.** Raw JSON outputs, normalized live
+   findings, and generated live reports are retained outside Git. Public
+   evidence is intentionally sanitized.
+
+6. **Detector validation is bounded.** The detector behavioral test suite
+   validates defined representative cases, including positive and negative
+   cases and an explicit IAM threshold-boundary case. It does not establish
+   exhaustive correctness across all possible AWS configurations, regions,
+   policies, or edge cases.
+
+7. **Security evidence is not external assurance.** The repository supports
+   security review, assurance, remediation tracking, and evidence-producing
+   workflows. It does not establish formal compliance or conformity with SOC 2,
+   HIPAA, NIST, or other frameworks or regulatory regimes, and it is not an
+   external audit, certification, or attestation.
+
 ## Evidence and Documentation
 
-| Resource | Purpose |
-|---|---|
-| [`docs/iam/read-only-assessment-policy.md`](docs/iam/read-only-assessment-policy.md) | Read-only IAM policy guidance |
-| [`docs/iam/read-only-assessment-policy.json`](docs/iam/read-only-assessment-policy.json) | Example read-only assessment policy |
-| [`docs/workflows/live-aws-lab-validation.md`](docs/workflows/live-aws-lab-validation.md) | Live-lab validation workflow |
-| [`evidence/live-lab-validation/`](evidence/live-lab-validation/) | Sanitized live-lab validation notes |
-| [`evidence/live-lab-reporting/`](evidence/live-lab-reporting/) | Sanitized live-lab reporting notes |
+| Resource                                                                                         | Purpose                              |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------ |
+| [`docs/iam/read-only-assessment-policy.md`](docs/iam/read-only-assessment-policy.md)             | Read-only IAM policy guidance        |
+| [`docs/iam/read-only-assessment-policy.json`](docs/iam/read-only-assessment-policy.json)         | Example read-only assessment policy  |
+| [`docs/workflows/live-aws-lab-validation.md`](docs/workflows/live-aws-lab-validation.md)         | Live-lab validation workflow         |
+| [`evidence/live-lab-validation/`](evidence/live-lab-validation/)                                 | Sanitized live-lab validation notes  |
+| [`evidence/live-lab-reporting/`](evidence/live-lab-reporting/)                                   | Sanitized live-lab reporting notes   |
 | [`docs/runbooks/credential-exposure-response.md`](docs/runbooks/credential-exposure-response.md) | Credential exposure response runbook |
 
 ## Target Use Cases
@@ -123,8 +165,8 @@ This project maps to practical cloud security and DevSecOps work:
 
 - AWS cloud security hardening
 - IAM and credential risk review
-- public exposure reduction
-- cloud logging and audit-readiness validation
+- public exposure assessment and guardrail validation
+- cloud logging and security-assurance validation
 - CI/CD security guardrails
 - security automation reporting
 - contractor/consultant evidence packages
@@ -147,21 +189,26 @@ aws-cloud-security-guardrails/
 
 ## Automation
 
-This project includes detection-only automation scripts.
+This project includes read-only assessment and non-remediating reporting automation scripts.
 
-| Script | Purpose |
-|---|---|
-| [automation/iam-key-age-check.py](automation/iam-key-age-check.py) | Reviews IAM user access key age and flags long-lived keys without printing secret access key values. |
-| [automation/security-group-risk-check.py](automation/security-group-risk-check.py) | Reviews AWS security group ingress rules and flags risky public exposure patterns such as public SSH, RDP, database, Kubernetes API, Redis, and broad port ranges. |
-| [automation/public-s3-check.py](automation/public-s3-check.py) | Reviews S3 bucket public exposure posture, including account-level and bucket-level Public Access Block, public bucket policy status, and public ACL grants. |
-| [automation/cloudtrail-coverage-check.py](automation/cloudtrail-coverage-check.py) | Reviews AWS CloudTrail logging coverage, including multi-region status, logging status, log file validation, KMS metadata, management event selectors, and recent event-history lookup availability. |
-| [automation/finding-normalizer.py](automation/finding-normalizer.py) | Normalizes JSON output from automation scripts into a consistent finding schema for evidence collection, reporting, remediation backlog creation, and future ticket generation. |
-| [automation/remediation-ticket-generator.py](automation/remediation-ticket-generator.py) | Converts normalized findings into structured Markdown or JSON remediation tickets for backlog creation and audit evidence workflows. |
-| [automation/executive-summary-generator.py](automation/executive-summary-generator.py) | Generates a client-style Markdown executive summary from normalized findings, including severity counts, top risks, affected resource types, remediation themes, and recommended next actions. |
+| Script                                                                                   | Purpose                                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [automation/iam-key-age-check.py](automation/iam-key-age-check.py)                       | Reviews IAM user access key age and flags long-lived keys without printing secret access key values.                                                                                                 |
+| [automation/security-group-risk-check.py](automation/security-group-risk-check.py)       | Reviews AWS security group ingress rules and flags risky public exposure patterns such as public SSH, RDP, database, Kubernetes API, Redis, and broad port ranges.                                   |
+| [automation/public-s3-check.py](automation/public-s3-check.py)                           | Reviews S3 bucket public exposure posture, including account-level and bucket-level Public Access Block, public bucket policy status, and public ACL grants.                                         |
+| [automation/cloudtrail-coverage-check.py](automation/cloudtrail-coverage-check.py)       | Reviews AWS CloudTrail logging coverage, including multi-region status, logging status, log file validation, KMS metadata, management event selectors, and recent event-history lookup availability. |
+| [automation/finding-normalizer.py](automation/finding-normalizer.py)                     | Normalizes JSON output from automation scripts into a consistent finding schema for evidence collection, reporting, remediation backlog creation, and future ticket generation.                      |
+| [automation/remediation-ticket-generator.py](automation/remediation-ticket-generator.py) | Converts normalized findings into structured Markdown or JSON remediation tickets for backlog creation and security-assurance evidence workflows.                                                    |
+| [automation/executive-summary-generator.py](automation/executive-summary-generator.py)   | Generates a client-style Markdown executive summary from normalized findings, including severity counts, top risks, affected resource types, remediation themes, and recommended next actions.       |
 
 ## Local Tests
 
-Local workflow processor tests are available under [tests/](tests/).
+Local tests under [tests/](tests/) include detector behavioral validation,
+JSON output-contract checks, and workflow processor tests.
+
+The detector tests exercise defined representative positive and negative cases
+and an explicit IAM threshold-boundary case without requiring live AWS API
+calls.
 
 Run:
 
@@ -182,8 +229,8 @@ The policy is intended for lab and portfolio validation of the read-only scripts
 
 This project includes operational runbooks that connect guardrail detections to response workflows.
 
-| Runbook | Purpose |
-|---|---|
+| Runbook                                                                                        | Purpose                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [docs/runbooks/credential-exposure-response.md](docs/runbooks/credential-exposure-response.md) | Defines the response workflow for suspected hardcoded secrets, API keys, AWS credentials, GitHub tokens, and related credential exposure events. |
 
 ## Synthetic Demo Workflow
